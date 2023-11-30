@@ -99,7 +99,7 @@ function iniciarOuPausar() {
 function zerar() {
     clearInterval(intervaloId);
     comecarPausarBtnSpan.textContent = "Começar";
-    comecarPausarImg.setAttribute('src', './imagens/play_arrow.png.png');
+    comecarPausarImg.setAttribute('src', './imagens/play_arrow.png');
     intervaloId = null;
 
 }
