@@ -3,8 +3,10 @@ const formAdicionarTarefa = document.querySelector('.app__form-add-task');
 const textarea = document.querySelector('.app__form-textarea');
 const ulTarefas = document.querySelector('.app__section-task-list');
 const btnCancelarTarefa = document.querySelector('.app__form-footer__button--cancel');
-const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+let tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
 const pDescricaoTarefa = document.querySelector('.app__section-active-task-description');
+const btnRemoverConcluidas = document.getElementById('btn-remover-concluidas');
+const btnRemoverTodas = document.getElementById('btn-remover-todas');
 
 let tarefaSelecionada = null;
 let liTarefaSelecionada = null;
@@ -112,4 +114,21 @@ document.addEventListener('FocoFinalizado', () => {
         tarefaSelecionada.completa = true;
         atualizarTarefa();
     }
-})
+});
+
+
+// lógica do curso
+const removerTarefas = (somenteConcluidas) => {
+    const seletor = somenteConcluidas ? '.app__section-task-list-item-complete' : '.app__section-task-list-item';
+    document.querySelectorAll(seletor)
+    .forEach(item => {
+        item.remove();
+    })
+
+    tarefas = somenteConcluidas ? tarefas.filter(tarefa => !tarefa.completa) : [];
+    atualizarTarefa();
+
+}
+
+btnRemoverConcluidas.onclick = () => removerTarefas(true);
+btnRemoverTodas.onclick = () => removerTarefas(false);
